@@ -88,9 +88,6 @@
 
 <!-- ══ Hero ══ -->
 <section id="hero">
-  <div class="hero-bg" style="background-image:url('img/image-cours.jpeg')"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-glow"></div>
   <div class="hero-in">
     <div class="hero-text">
       <span class="eyebrow">Collège Privé · Toumodi, Côte d'Ivoire</span>
@@ -108,10 +105,34 @@
         <span class="hero-val"><svg class="ic" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>Discipline</span></span>
       </div>
     </div>
-    <div class="hero-visual" aria-hidden="true">
-      <div class="hero-card"><img src="img/image-salle_de_classe.jpeg" alt="Salle de classe des Élites"></div>
+    <div class="hero-visual">
+      <div class="hero-carousel" id="heroCarousel" role="region" aria-label="Photos et actualités du collège">
+        <div class="hc-slide active">
+          <img src="img/image-cours.jpeg" alt="Cour et bâtiments du Collège Les Élites">
+          <div class="hc-slide-cap"><span class="hc-tag">Notre campus</span><h3>Un cadre paisible et verdoyant à Toumodi</h3></div>
+        </div>
+        <div class="hc-slide">
+          <img src="img/image-salle_de_classe.jpeg" alt="Salle de classe équipée des Élites">
+          <div class="hc-slide-cap"><span class="hc-tag">Infrastructures</span><h3>Des salles de classe modernes et équipées</h3></div>
+        </div>
+        <div class="hc-slide">
+          <img src="img/flyers2.jpeg" alt="Rentrée scolaire 2025-2026">
+          <div class="hc-slide-cap"><span class="hc-tag">Actualité</span><h3>Inscriptions 2025-2026 ouvertes</h3></div>
+        </div>
+        <div class="hc-slide">
+          <img src="img/flyers.jpeg" alt="Présentation officielle Les Élites de Toumodi">
+          <div class="hc-slide-cap"><span class="hc-tag">Code MEN 310648</span><h3>Un établissement reconnu par l'État</h3></div>
+        </div>
+        <div class="hc-dots">
+          <button class="hc-dot active" aria-label="Photo 1"></button>
+          <button class="hc-dot" aria-label="Photo 2"></button>
+          <button class="hc-dot" aria-label="Photo 3"></button>
+          <button class="hc-dot" aria-label="Photo 4"></button>
+        </div>
+        <button class="hc-arrow prev" aria-label="Photo précédente"><svg class="ic" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+        <button class="hc-arrow next" aria-label="Photo suivante"><svg class="ic" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
+      </div>
       <div class="hero-badge"><strong>2025</strong><span>Rentrée scolaire</span></div>
-      <div class="hero-chip"><svg class="ic" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.5 3 6 3s6-2 6-3v-5"/></svg>Code MEN <strong>310648</strong></div>
     </div>
   </div>
 </section>
