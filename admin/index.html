@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administration — Collège Les Élites de Toumodi</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0E1E3F;--navy-700:#15294F;--navy-600:#1E3A6B;--gold:#E6A92B;--gold-soft:#F3CC66;--gold-ink:#8A6010;
+  --paper:#F6F8FC;--surface:#fff;--ink:#0C1526;--muted:#525C73;--line:rgba(14,30,63,.12);
+  --disp:'Syne',sans-serif;--ui:'DM Sans',sans-serif;--lbl:'Space Mono',monospace;
+  --rad:10px;--shadow:0 2px 8px rgba(14,30,63,.07),0 18px 40px rgba(14,30,63,.1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--ui);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.6}
+h1,h2,h3{font-family:var(--disp)}
+.ic{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:.92rem;width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy-600);box-shadow:0 0 0 3px rgba(33,64,138,.12)}
+textarea{resize:vertical;min-height:90px}
+label{display:block;font-family:var(--lbl);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--lbl);font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:12px 20px;border:none;border-radius:9px;transition:transform .14s,box-shadow .14s,background .15s}
+.btn-g{background:linear-gradient(135deg,var(--gold-soft),var(--gold));color:var(--navy)}
+.btn-g:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(230,169,43,.35)}
+.btn-n{background:var(--navy);color:#fff}.btn-n:hover{transform:translateY(-1px)}
+.btn-o{background:#fff;color:var(--navy);border:1.5px solid var(--line)}.btn-o:hover{border-color:var(--navy)}
+.btn-d{background:#FBEAEA;color:#B5302A}.btn-d:hover{background:#F5D6D4}
+.btn-sm{padding:8px 13px;font-size:.6rem}
+
+/* Login */
+#loginScreen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(120% 120% at 50% 0%,var(--navy-700),var(--navy));padding:24px}
+.login-card{background:#fff;border-radius:18px;padding:46px 40px;width:100%;max-width:400px;box-shadow:0 30px 70px rgba(0,0,0,.4)}
+.login-card img{height:46px;margin:0 auto 20px;display:block}
+.login-card h1{font-size:1.3rem;text-align:center;margin-bottom:6px}
+.login-card .sub{text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:28px}
+.login-card .field{margin-bottom:16px}
+.login-err{background:#FBEAEA;color:#B5302A;font-size:.82rem;padding:10px 14px;border-radius:8px;margin-bottom:16px;display:none}
+.login-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:18px;line-height:1.5}
+
+/* App shell */
+#adminApp{display:none;min-height:100vh;grid-template-columns:256px 1fr}
+.sidebar{background:var(--navy);color:#fff;padding:24px 16px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.sb-brand{display:flex;align-items:center;gap:11px;padding:6px 8px 22px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:18px}
+.sb-brand img{height:34px}
+.sb-brand strong{font-family:var(--disp);font-size:.84rem;line-height:1.1}
+.sb-brand span{display:block;font-family:var(--lbl);font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:3px}
+.sb-btn{display:flex;align-items:center;gap:12px;width:100%;background:none;border:none;color:rgba(255,255,255,.7);font-family:var(--lbl);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;padding:12px 14px;border-radius:9px;text-align:left;transition:background .15s,color .15s;margin-bottom:3px}
+.sb-btn .ic{width:18px;height:18px}
+.sb-btn:hover{background:rgba(255,255,255,.06);color:#fff}
+.sb-btn.active{background:rgba(230,169,43,.14);color:var(--gold)}
+.sb-foot{margin-top:auto;padding-top:16px;border-top:1px solid rgba(255,255,255,.1)}
+.sb-user{font-size:.74rem;color:rgba(255,255,255,.55);padding:6px 8px 12px;word-break:break-all}
+.main{padding:34px 40px 60px;overflow-y:auto}
+.topbar-a{display:flex;align-items:center;justify-content:space-between;margin-bottom:30px;flex-wrap:wrap;gap:14px}
+.topbar-a h2{font-size:1.5rem}
+.topbar-a .sub{font-family:var(--lbl);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink)}
+.panel{display:none}.panel.active{display:block}
+
+/* Cards & grids */
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px 28px;box-shadow:var(--shadow);margin-bottom:22px}
+.card h3{font-size:1.05rem;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.card h3 .ic{color:var(--gold-ink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.field{margin-bottom:16px}
+.row-actions{display:flex;gap:8px;flex-wrap:wrap}
+.stat-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:26px}
+.stat-c{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px;box-shadow:var(--shadow)}
+.stat-c .n{font-family:var(--disp);font-size:2rem;font-weight:800;color:var(--navy)}
+.stat-c .l{font-family:var(--lbl);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.item-row{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:12px}
+.item-row .ir-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.item-row .ir-title{font-family:var(--disp);font-weight:700;font-size:1rem}
+.item-row .ir-meta{font-size:.8rem;color:var(--muted)}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:14px 22px;border-radius:10px;font-size:.88rem;box-shadow:var(--shadow);transform:translateY(80px);opacity:0;transition:.3s;z-index:999;display:flex;align-items:center;gap:10px}
+.toast.show{transform:none;opacity:1}
+.toast .ic{color:var(--gold)}
+.loader{position:fixed;inset:0;background:rgba(255,255,255,.7);display:none;align-items:center;justify-content:center;z-index:900}
+.loader.show{display:flex}
+.spin{width:38px;height:38px;border:3px solid var(--line);border-top-color:var(--gold);border-radius:50%;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.hint{font-size:.78rem;color:var(--muted);margin-top:6px}
+@media(max-width:860px){#adminApp{grid-template-columns:1fr}.sidebar{position:fixed;left:0;top:0;z-index:50;transform:translateX(-100%);transition:transform .3s;width:256px}.sidebar.open{transform:none}.main{padding:24px 20px 50px}.grid2,.grid3,.stat-cards{grid-template-columns:1fr}.mob-toggle{display:inline-flex!important}}
+.mob-toggle{display:none;align-items:center;gap:8px;background:var(--navy);color:#fff;border:none;padding:10px 14px;border-radius:9px;margin-bottom:18px}
+</style>
+</head>
+<body>
+
+<!-- ══ Login ══ -->
+<div id="loginScreen">
+  <div class="login-card">
+    <img src="../img/logo-mark-white.png" alt="Les Élites" style="filter:none;background:var(--navy);padding:10px 14px;border-radius:10px">
+    <h1>Espace Administration</h1>
+    <p class="sub">Collège Privé Les Élites de Toumodi</p>
+    <div class="login-err" id="loginError"></div>
+    <div class="field"><label>Email</label><input id="loginUser" type="email" placeholder="admin@collegelesilites.ci" autocomplete="username"></div>
+    <div class="field"><label>Mot de passe</label><input id="loginPass" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <button class="btn btn-g" style="width:100%;justify-content:center" onclick="doLogin()">Se connecter</button>
+    <p class="login-note">Accès réservé à l'administration de l'établissement.<br>Authentification sécurisée par Firebase.</p>
+  </div>
+</div>
+
+<!-- ══ App ══ -->
+<div id="adminApp">
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <img src="../img/logo-mark-white.png" alt="">
+      <strong>Les Élites<span>Administration</span></strong>
+    </div>
+    <button class="sb-btn active" data-panel="dashboard" onclick="showPanel('dashboard')"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg> Tableau de bord</button>
+    <button class="sb-btn" data-panel="config" onclick="showPanel('config')"><svg class="ic" viewBox="0 0 24 24"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Établissement</button>
+    <button class="sb-btn" data-panel="events" onclick="showPanel('events')"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg> Actualités</button>
+    <button class="sb-btn" data-panel="teachers" onclick="showPanel('teachers')"><svg class="ic" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg> Enseignants</button>
+    <button class="sb-btn" data-panel="gallery" onclick="showPanel('gallery')"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg> Galerie</button>
+    <div class="sb-foot">
+      <button class="sb-btn" onclick="openSite()"><svg class="ic" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14 21 3"/></svg> Voir le site</button>
+      <button class="sb-btn" onclick="doLogout()"><svg class="ic" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg> Déconnexion</button>
+      <div class="sb-user" id="sbUser"></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <button class="mob-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')"><svg class="ic" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg> Menu</button>
+
+    <!-- Dashboard -->
+    <section class="panel active" id="panel-dashboard">
+      <div class="topbar-a"><div><div class="sub">Vue d'ensemble</div><h2>Tableau de bord</h2></div></div>
+      <div class="stat-cards">
+        <div class="stat-c"><div class="n" id="ds-ev">—</div><div class="l">Actualités</div></div>
+        <div class="stat-c"><div class="n" id="ds-te">—</div><div class="l">Enseignants</div></div>
+        <div class="stat-c"><div class="n" id="ds-gl">—</div><div class="l">Photos galerie</div></div>
+        <div class="stat-c"><div class="n" id="ds-yr">—</div><div class="l">Année scolaire</div></div>
+      </div>
+      <div class="card">
+        <h3><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> Informations de l'établissement</h3>
+        <div id="dashInfo" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:.9rem"></div>
+      </div>
+      <div class="card">
+        <h3><svg class="ic" viewBox="0 0 24 24"><path d="M12 2l2.9 5.88 6.49.94-4.7 4.58 1.11 6.46L12 17.77l-5.8 3.05 1.11-6.46-4.7-4.58 6.49-.94L12 2z"/></svg> Bienvenue</h3>
+        <p style="color:var(--muted)">Utilisez le menu de gauche pour mettre à jour le contenu du site : coordonnées, frais, actualités, équipe enseignante et galerie photos. Les modifications sont enregistrées en ligne et visibles immédiatement sur le site public.</p>
+      </div>
+    </section>
+
+    <!-- Config -->
+    <section class="panel" id="panel-config">
+      <div class="topbar-a"><div><div class="sub">Paramètres</div><h2>Établissement</h2></div><button class="btn btn-g" onclick="saveConfig()"><svg class="ic" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg> Enregistrer</button></div>
+      <div class="card">
+        <h3>Coordonnées</h3>
+        <div class="field"><label>Nom de l'établissement</label><input id="cf-name"></div>
+        <div class="grid2">
+          <div class="field"><label>Téléphone principal</label><input id="cf-tel"></div>
+          <div class="field"><label>Téléphone secondaire</label><input id="cf-tel2"></div>
+        </div>
+        <div class="grid2">
+          <div class="field"><label>Email</label><input id="cf-email"></div>
+          <div class="field"><label>Numéro WhatsApp (sans +)</label><input id="cf-whatsapp" placeholder="2250708665904"></div>
+        </div>
+        <div class="field"><label>Adresse</label><input id="cf-address"></div>
+        <div class="grid2">
+          <div class="field"><label>Code MEN</label><input id="cf-code"></div>
+          <div class="field"><label>Année scolaire</label><input id="cf-year" placeholder="2025-2026"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Statistiques (page d'accueil)</h3>
+        <div class="grid3">
+          <div class="field"><label>Apprenants</label><input id="cf-s1" type="number"></div>
+          <div class="field"><label>Enseignants</label><input id="cf-s2" type="number"></div>
+          <div class="field"><label>Niveaux</label><input id="cf-s3" type="number"></div>
+        </div>
+        <div class="field" style="max-width:33%"><label>Services offerts</label><input id="cf-s4" type="number"></div>
+      </div>
+      <div class="card">
+        <h3>Frais de scolarité</h3>
+        <div class="grid2">
+          <div class="field"><label>Droit d'inscription</label><input id="cf-inscription" placeholder="37 000 FCFA"></div>
+          <div class="field"><label>Droit d'examen (3ᵉ)</label><input id="cf-examen" placeholder="3 000 FCFA"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events -->
+    <section class="panel" id="panel-events">
+      <div class="topbar-a"><div><div class="sub">Vie scolaire</div><h2>Actualités &amp; événements</h2></div><button class="btn btn-g" onclick="addEvent()"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> Ajouter</button></div>
+      <div id="events-list"></div>
+    </section>
+
+    <!-- Teachers -->
+    <section class="panel" id="panel-teachers">
+      <div class="topbar-a"><div><div class="sub">Équipe</div><h2>Corps enseignant</h2></div><button class="btn btn-g" onclick="addTeacher()"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> Ajouter</button></div>
+      <div id="teachers-list"></div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="panel" id="panel-gallery">
+      <div class="topbar-a"><div><div class="sub">Médias</div><h2>Galerie photos</h2></div><button class="btn btn-g" onclick="addPhoto()"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> Ajouter</button></div>
+      <p class="hint" style="margin-bottom:18px">Indiquez le chemin d'une image du dossier <code>img/</code> (ex : <code>img/image-cours.jpeg</code>) ou une URL complète.</p>
+      <div id="gallery-list"></div>
+    </section>
+  </main>
+</div>
+
+<div class="loader" id="loader"><div class="spin"></div></div>
+<div class="toast" id="toast"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span id="toastMsg">Enregistré</span></div>
+
+<!-- Firebase + CMS -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="../cms.js"></script>
+<script>
+/* ════ CONFIG FIREBASE (à renseigner — voir GUIDE_DEPLOIEMENT.md étape 3) ════ */
+const firebaseConfig = {
+  apiKey:      "VOTRE_API_KEY",
+  authDomain:  "VOTRE-PROJET.firebaseapp.com",
+  projectId:   "VOTRE-PROJET",
+  databaseURL: "https://VOTRE-PROJET-default-rtdb.firebasedatabase.app"
+};
+
+let auth = null, firebaseReady = false;
+try {
+  if (firebaseConfig.apiKey !== "VOTRE_API_KEY") {
+    firebase.initializeApp(firebaseConfig);
+    auth = firebase.auth();
+    firebaseReady = true;
+  }
+} catch (e) { console.warn(e); }
+
+const $ = id => document.getElementById(id);
+function showLoader(){$('loader').classList.add('show')}
+function hideLoader(){$('loader').classList.remove('show')}
+function toast(msg){const t=$('toast');$('toastMsg').textContent=msg||'Enregistré';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600)}
+
+/* ════ AUTH ════ */
+if (firebaseReady) {
+  auth.onAuthStateChanged(async user => {
+    showLoader();
+    if (user) {
+      window.FIREBASE_ID_TOKEN = await user.getIdToken(true);
+      if (window._tk) clearInterval(window._tk);
+      window._tk = setInterval(async()=>{try{window.FIREBASE_ID_TOKEN=await user.getIdToken(true)}catch(e){}},55*60*1000);
+      $('loginScreen').style.display='none';
+      $('adminApp').style.display='grid';
+      $('sbUser').textContent=user.email;
+      await initAdmin();
+    } else {
+      if (window._tk) clearInterval(window._tk);
+      window.FIREBASE_ID_TOKEN=null;
+      $('adminApp').style.display='none';
+      $('loginScreen').style.display='flex';
+    }
+    hideLoader();
+  });
+}
+
+async function doLogin(){
+  const u=$('loginUser').value.trim(), p=$('loginPass').value, err=$('loginError');
+  if(!u||!p){err.textContent="Veuillez remplir tous les champs.";err.style.display='block';return}
+  if(!firebaseReady){err.textContent="Firebase n'est pas encore configuré. Voir GUIDE_DEPLOIEMENT.md.";err.style.display='block';return}
+  showLoader();
+  try{ err.style.display='none'; await auth.signInWithEmailAndPassword(u,p); }
+  catch(e){ hideLoader(); err.textContent="Email ou mot de passe incorrect."; err.style.display='block'; }
+}
+function doLogout(){ if(auth){showLoader();auth.signOut().then(()=>{$('loginPass').value='';hideLoader()})} }
+function openSite(){ window.open('../index.html','_blank') }
+
+/* ════ DATA HELPERS ════ */
+async function gd(key){
+  const v = await cmsGet(key);
+  return (v!==null && v!==undefined) ? v : (CMS_DEFAULTS[key] !== undefined ? CMS_DEFAULTS[key] : null);
+}
+
+/* ════ PANELS ════ */
+function showPanel(name){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sb-btn[data-panel]').forEach(b=>b.classList.remove('active'));
+  $('panel-'+name).classList.add('active');
+  const b=document.querySelector(`[data-panel="${name}"]`); if(b)b.classList.add('active');
+  document.getElementById('sidebar').classList.remove('open');
+  const map={dashboard:loadDash,config:loadConfig,events:loadEvents,teachers:loadTeachers,gallery:loadGallery};
+  if(map[name])map[name]();
+}
+
+async function initAdmin(){ await loadDash(); }
+
+/* ════ DASHBOARD ════ */
+async function loadDash(){
+  const [ev,te,gl,cfg]=await Promise.all([gd('site:events'),gd('site:teachers'),gd('site:gallery'),gd('site:config')]);
+  $('ds-ev').textContent=(ev||[]).length; $('ds-te').textContent=(te||[]).length;
+  $('ds-gl').textContent=(gl||[]).length; $('ds-yr').textContent=(cfg&&cfg.year)||'—';
+  if(cfg) $('dashInfo').innerHTML=`
+    <div><strong>Établissement :</strong> ${cfg.name||''}</div>
+    <div><strong>Code MEN :</strong> ${cfg.code||''}</div>
+    <div><strong>Téléphone :</strong> ${cfg.tel||''}</div>
+    <div><strong>Email :</strong> ${cfg.email||''}</div>
+    <div style="grid-column:1/-1"><strong>Adresse :</strong> ${cfg.address||''}</div>`;
+}
+
+/* ════ CONFIG ════ */
+async function loadConfig(){
+  const c=await gd('site:config')||{};
+  ['name','tel','tel2','email','whatsapp','address','code','year','s1','s2','s3','s4','inscription','examen']
+    .forEach(k=>{const el=$('cf-'+k);if(el)el.value=c[k]!==undefined?c[k]:''});
+}
+async function saveConfig(){
+  showLoader();
+  const c=await gd('site:config')||{};
+  ['name','tel','tel2','email','whatsapp','address','code','year','inscription','examen']
+    .forEach(k=>{c[k]=$('cf-'+k).value.trim()});
+  ['s1','s2','s3','s4'].forEach(k=>{c[k]=parseInt($('cf-'+k).value,10)||0});
+  const ok=await cmsSet('site:config',c);
+  hideLoader(); toast(ok?'Établissement enregistré':'Erreur — vérifiez la connexion');
+}
+
+/* ════ EVENTS ════ */
+let _events=[];
+async function loadEvents(){ _events=(await gd('site:events'))||[]; renderEvents(); }
+function renderEvents(){
+  $('events-list').innerHTML=_events.map((e,i)=>`
+    <div class="item-row">
+      <div class="field"><label>Titre</label><input value="${esc(e.title)}" oninput="_events[${i}].title=this.value"></div>
+      <div class="grid2">
+        <div class="field"><label>Date</label><input value="${esc(e.date)}" oninput="_events[${i}].date=this.value" placeholder="Septembre 2025"></div>
+        <div class="field"><label>Étiquette</label><input value="${esc(e.tag)}" oninput="_events[${i}].tag=this.value" placeholder="Vie scolaire"></div>
+      </div>
+      <div class="field"><label>Image (chemin ou URL)</label><input value="${esc(e.img)}" oninput="_events[${i}].img=this.value" placeholder="img/flyers2.jpeg"></div>
+      <div class="field"><label>Texte</label><textarea oninput="_events[${i}].text=this.value">${esc(e.text)}</textarea></div>
+      <div class="row-actions"><button class="btn btn-d btn-sm" onclick="delEvent(${i})">Supprimer</button></div>
+    </div>`).join('') || '<p class="hint">Aucune actualité. Cliquez sur « Ajouter ».</p>';
+}
+function addEvent(){_events.unshift({title:'Nouvelle actualité',date:'',tag:'',img:'',text:''});renderEvents();}
+function delEvent(i){_events.splice(i,1);renderEvents();saveEvents();}
+async function saveEvents(){showLoader();const ok=await cmsSet('site:events',_events);hideLoader();toast(ok?'Actualités enregistrées':'Erreur')}
+// auto-save on add panel via explicit button:
+document.addEventListener('keydown',e=>{ if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();const p=document.querySelector('.panel.active');if(p&&p.id==='panel-events')saveEvents();if(p&&p.id==='panel-teachers')saveTeachers();if(p&&p.id==='panel-gallery')saveGallery();if(p&&p.id==='panel-config')saveConfig();}});
+
+/* ════ TEACHERS ════ */
+let _teachers=[];
+async function loadTeachers(){ _teachers=(await gd('site:teachers'))||[]; renderTeachers(); }
+function renderTeachers(){
+  $('teachers-list').innerHTML=_teachers.map((t,i)=>`
+    <div class="item-row">
+      <div class="grid3">
+        <div class="field"><label>Intitulé</label><input value="${esc(t.name)}" oninput="_teachers[${i}].name=this.value"></div>
+        <div class="field"><label>Matière</label><input value="${esc(t.subj)}" oninput="_teachers[${i}].subj=this.value"></div>
+        <div class="field"><label>Cycle</label><input value="${esc(t.cycle)}" oninput="_teachers[${i}].cycle=this.value" placeholder="6ᵉ à 3ᵉ"></div>
+      </div>
+      <div class="row-actions"><button class="btn btn-d btn-sm" onclick="delTeacher(${i})">Supprimer</button></div>
+    </div>`).join('') || '<p class="hint">Aucun enseignant.</p>';
+}
+function addTeacher(){_teachers.push({name:'Professeur de …',subj:'',cycle:'6ᵉ à 3ᵉ'});renderTeachers();}
+function delTeacher(i){_teachers.splice(i,1);renderTeachers();saveTeachers();}
+async function saveTeachers(){showLoader();const ok=await cmsSet('site:teachers',_teachers);hideLoader();toast(ok?'Enseignants enregistrés':'Erreur')}
+
+/* ════ GALLERY ════ */
+let _gallery=[];
+async function loadGallery(){ _gallery=(await gd('site:gallery'))||[]; renderGallery(); }
+function renderGallery(){
+  $('gallery-list').innerHTML=_gallery.map((g,i)=>`
+    <div class="item-row">
+      <div class="ir-head" style="margin-bottom:14px">
+        ${g.src?`<img src="${esc(g.src)}" alt="" style="width:90px;height:64px;object-fit:cover;border-radius:8px;border:1px solid var(--line)">`:''}
+        <button class="btn btn-d btn-sm" onclick="delPhoto(${i})">Supprimer</button>
+      </div>
+      <div class="grid2">
+        <div class="field"><label>Image (chemin ou URL)</label><input value="${esc(g.src)}" oninput="_gallery[${i}].src=this.value" placeholder="img/image-cours.jpeg"></div>
+        <div class="field"><label>Légende</label><input value="${esc(g.caption)}" oninput="_gallery[${i}].caption=this.value"></div>
+      </div>
+    </div>`).join('') || '<p class="hint">Aucune photo.</p>';
+}
+function addPhoto(){_gallery.push({src:'',caption:''});renderGallery();}
+function delPhoto(i){_gallery.splice(i,1);renderGallery();saveGallery();}
+async function saveGallery(){showLoader();const ok=await cmsSet('site:gallery',_gallery);hideLoader();toast(ok?'Galerie enregistrée':'Erreur')}
+
+/* utils */
+function esc(s){return (s==null?'':String(s)).replace(/"/g,'&quot;').replace(/</g,'&lt;')}
+
+/* Ajoute des boutons Enregistrer en bas des panneaux liste */
+window.addEventListener('DOMContentLoaded',()=>{
+  const addSave=(panel,fn,label)=>{const p=$('panel-'+panel);if(!p)return;const b=document.createElement('button');b.className='btn btn-n';b.style.marginTop='8px';b.innerHTML='Enregistrer '+label;b.onclick=fn;p.appendChild(b);};
+  addSave('events',()=>saveEvents(),'les actualités');
+  addSave('teachers',()=>saveTeachers(),'les enseignants');
+  addSave('gallery',()=>saveGallery(),'la galerie');
+  if(!firebaseReady){ /* mode démo : affiche le login avec note */ }
+});
+</script>
+</body>
+</html>

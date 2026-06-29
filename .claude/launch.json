@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ctm-static",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "serve", "-l", "5599", "../ctm-repo"],
+      "port": 5599
+    },
+    {
+      "name": "elite-site",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "serve", "-l", "5601", "."],
+      "port": 5601
+    }
+  ]
+}
