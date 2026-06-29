@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://les-elites-toumodi.netlify.app/sitemap.xml
