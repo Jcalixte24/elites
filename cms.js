@@ -13,7 +13,7 @@
 /* ════════════════════════════════════════════
    VOTRE CONFIGURATION FIREBASE ICI
    ════════════════════════════════════════════ */
-const FIREBASE_URL = 'https://VOTRE-PROJET-default-rtdb.firebasedatabase.app';
+const FIREBASE_URL = 'https://elites-cms-default-rtdb.europe-west1.firebasedatabase.app';
 
 /* ════════════════════════════════════════════
    Règles de sécurité Firebase à appliquer
