@@ -83,6 +83,21 @@
     if (window.bindLightbox) window.bindLightbox();
   }
 
+  // ── Cartes "Nos atouts" (accueil) ──
+  const featGrid = document.getElementById('cms-features-grid');
+  if (featGrid && CMS.features && CMS.features.length) {
+    const ICONS = window.FEAT_ICONS || {};
+    featGrid.innerHTML = CMS.features.map((f, i) => {
+      const ico = ICONS[f.icon] || ICONS['star'];
+      const svg = ico ? `<svg class="ic" viewBox="0 0 24 24">${ico.path}</svg>` : '';
+      return `<div class="feature rv d${(i % 3) + 1}">
+        <span class="icon-chip">${svg}</span>
+        <h3>${f.title || ''}</h3>
+        <p>${f.text || ''}</p>
+      </div>`;
+    }).join('');
+  }
+
   // ── Réinitialise les animations sur le contenu fraîchement injecté ──
-  document.querySelectorAll('#cms-events-grid .rv, #cms-teachers-list .tcard, #cms-gallery-grid .rv').forEach(el => el.classList.add('on'));
+  document.querySelectorAll('#cms-events-grid .rv, #cms-teachers-list .tcard, #cms-gallery-grid .rv, #cms-features-grid .rv').forEach(el => el.classList.add('on'));
 })();

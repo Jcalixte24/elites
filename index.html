@@ -222,7 +222,7 @@
       <h2>Nos <em>atouts</em> pédagogiques</h2>
       <p>Une offre complète pour l'épanouissement académique, sportif et personnel de chaque élève.</p>
     </div>
-    <div class="atouts-grid">
+    <div class="atouts-grid" id="cms-features-grid">
       <div class="feature rv d1">
         <span class="icon-chip"><svg class="ic" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
         <h3>Cours d'informatique</h3>
@@ -376,14 +376,17 @@
           <div class="insc-step"><span class="step-n">2</span><div><strong>Documents</strong><span>Bulletins, extrait, photos</span></div></div>
           <div class="insc-step"><span class="step-n">3</span><div><strong>Confirmation</strong><span>Frais et accueil</span></div></div>
         </div>
-        <form class="contact-form" novalidate>
+        <form class="contact-form" action="https://formspree.io/f/mdarlqdd" method="POST">
+          <input type="hidden" name="_subject" value="Pré-inscription — Collège Les Élites de Toumodi">
+          <input type="hidden" name="_next" value="https://collegesleselitestoumodi.ci/?merci=1">
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
           <div class="form-row">
-            <div class="field"><label for="pn">Parent <span class="req">*</span></label><input id="pn" type="text" placeholder="Prénom et nom" required></div>
-            <div class="field"><label for="ph">Téléphone <span class="req">*</span></label><input id="ph" type="tel" placeholder="+225 00 00 00 00" required></div>
+            <div class="field"><label for="pn">Parent <span class="req">*</span></label><input id="pn" name="parent" type="text" placeholder="Prénom et nom" required></div>
+            <div class="field"><label for="ph">Téléphone <span class="req">*</span></label><input id="ph" name="telephone" type="tel" placeholder="+225 00 00 00 00" required></div>
           </div>
-          <div class="field"><label for="sn">Nom de l'élève <span class="req">*</span></label><input id="sn" type="text" placeholder="Prénom et nom de l'élève" required></div>
+          <div class="field"><label for="sn">Nom de l'élève <span class="req">*</span></label><input id="sn" name="eleve" type="text" placeholder="Prénom et nom de l'élève" required></div>
           <div class="field"><label for="cl">Classe souhaitée</label>
-            <select id="cl">
+            <select id="cl" name="classe">
               <option value="">Sélectionnez une classe</option>
               <optgroup label="Primaire">
                 <option>CP1 / CP2</option><option>CE1 / CE2</option><option>CM1 / CM2</option>
@@ -396,7 +399,7 @@
               </optgroup>
             </select>
           </div>
-          <div class="field"><label for="ms">Message</label><textarea id="ms" placeholder="Vos questions ou remarques..."></textarea></div>
+          <div class="field"><label for="ms">Message</label><textarea id="ms" name="message" placeholder="Vos questions ou remarques..."></textarea></div>
           <button type="submit" class="btn-navy" style="width:100%;justify-content:center">Envoyer la demande
             <svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </form>

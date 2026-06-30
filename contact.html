@@ -96,16 +96,21 @@
           <div class="insc-step"><span class="step-n">3</span><div><strong>Confirmation</strong><span>Règlement des frais et accueil</span></div></div>
         </div>
 
-        <form class="contact-form" novalidate>
+        <form class="contact-form" action="https://formspree.io/f/mdarlqdd" method="POST">
+          <!-- Champs cachés Formspree -->
+          <input type="hidden" name="_subject" value="Nouvelle demande d'inscription — Collège Les Élites">
+          <input type="hidden" name="_next" value="https://collegesleselitestoumodi.ci/contact.html?merci=1">
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
           <div class="form-row">
-            <div class="field"><label for="pn">Parent / tuteur <span class="req">*</span></label><input id="pn" type="text" placeholder="Prénom et nom" required></div>
-            <div class="field"><label for="ph">Téléphone <span class="req">*</span></label><input id="ph" type="tel" placeholder="+225 00 00 00 00" required></div>
+            <div class="field"><label for="pn">Parent / tuteur <span class="req">*</span></label><input id="pn" name="parent" type="text" placeholder="Prénom et nom" required></div>
+            <div class="field"><label for="ph">Téléphone <span class="req">*</span></label><input id="ph" name="telephone" type="tel" placeholder="+225 00 00 00 00" required></div>
           </div>
-          <div class="field"><label for="em">Email</label><input id="em" type="email" placeholder="exemple@email.com"></div>
+          <div class="field"><label for="em">Email</label><input id="em" name="email" type="email" placeholder="exemple@email.com"></div>
           <div class="form-row">
-            <div class="field"><label for="sn">Nom de l'élève <span class="req">*</span></label><input id="sn" type="text" placeholder="Prénom et nom" required></div>
+            <div class="field"><label for="sn">Nom de l'élève <span class="req">*</span></label><input id="sn" name="eleve" type="text" placeholder="Prénom et nom" required></div>
             <div class="field"><label for="cl">Classe souhaitée <span class="req">*</span></label>
-              <select id="cl" required>
+              <select id="cl" name="classe" required>
                 <option value="">Choisir…</option>
                 <optgroup label="Primaire"><option>CP1 / CP2</option><option>CE1 / CE2</option><option>CM1 / CM2</option></optgroup>
                 <optgroup label="Collège"><option>6ᵉ</option><option>5ᵉ</option><option>4ᵉ</option><option>3ᵉ</option></optgroup>
@@ -113,7 +118,7 @@
               </select>
             </div>
           </div>
-          <div class="field"><label for="ms">Message</label><textarea id="ms" placeholder="Vos questions ou informations complémentaires..."></textarea></div>
+          <div class="field"><label for="ms">Message</label><textarea id="ms" name="message" placeholder="Vos questions ou informations complémentaires..."></textarea></div>
           <button type="submit" class="btn-p" style="width:100%;justify-content:center">Envoyer ma demande
             <svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           <p style="font-size:.78rem;color:var(--mid);text-align:center;margin-top:4px">Vous pouvez aussi nous joindre directement par téléphone ou WhatsApp.</p>
