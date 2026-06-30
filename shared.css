@@ -382,6 +382,8 @@ h1 em, h2 em, h3 em { font-style: normal; color: var(--gold-ink); }
 .page-banner h1 { font-size: clamp(2.1rem,4.4vw,3.5rem); font-weight: 800; color: #fff; text-transform: uppercase; margin-top: 14px; position: relative; z-index: 1; }
 .page-banner h1 em { color: var(--gold); }
 .page-banner p { color: rgba(255,255,255,.64); margin-top: 14px; max-width: 520px; position: relative; z-index: 1; }
+.page-banner.has-photo { background: linear-gradient(125deg, rgba(14,30,63,.88) 0%, rgba(30,58,107,.74) 58%, rgba(14,30,63,.86) 100%), var(--pb-img, var(--navy)) center/cover no-repeat; }
+.page-banner.has-photo .inner { position: relative; z-index: 1; }
 
 /* ── Breadcrumb ── */
 .breadcrumb { background: var(--cream); border-bottom: 1px solid var(--line); }

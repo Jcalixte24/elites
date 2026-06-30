@@ -86,7 +86,7 @@ const CMS_DEFAULTS = {
     tel2: '+225 07 87 12 22 89',
     email: 'collegeelites.tdi@gmail.com',
     address: "Route de Oumé, face à la caserne des Sapeurs-Pompiers — Toumodi, Côte d'Ivoire",
-    year: '2025-2026',
+    year: '2026-2027',
     whatsapp: '2250708665904',
     // statistiques (page d'accueil)
     s1: 300, s2: 20, s3: 4, s4: 6,
@@ -95,9 +95,9 @@ const CMS_DEFAULTS = {
     examen: '3 000 FCFA',
   },
   'site:events': [
-    { img: 'img/flyers2.jpeg', date: 'Septembre 2025', title: "Ouverture des inscriptions 2025-2026", text: "Les inscriptions pour la nouvelle année scolaire sont ouvertes, de la 6ᵉ à la 3ᵉ. Places limitées.", tag: 'Inscriptions' },
+    { img: 'img/flyers2.jpeg', date: 'Septembre 2025', title: "Ouverture des inscriptions 2026-2027", text: "Les inscriptions pour la nouvelle année scolaire sont ouvertes. Places limitées.", tag: 'Inscriptions' },
     { img: 'img/image-salle_de_classe.jpeg', date: 'Septembre 2025', title: "De nouvelles salles équipées", text: "Le collège poursuit l'aménagement de salles modernes et lumineuses pour le confort d'apprentissage des élèves.", tag: 'Campus' },
-    { img: 'img/image-cours.jpeg', date: 'Année 2025-2026', title: "Lancement des clubs scolaires", text: "Clubs sportifs et artistiques : les élèves peuvent s'inscrire et révéler leurs talents tout au long de l'année.", tag: 'Vie scolaire' },
+    { img: 'img/image-cours.jpeg', date: 'Année 2026-2027', title: "Lancement des clubs scolaires", text: "Clubs sportifs et artistiques : les élèves peuvent s'inscrire et révéler leurs talents tout au long de l'année.", tag: 'Vie scolaire' },
   ],
   'site:teachers': [
     { name: 'Professeur de Mathématiques',     subj: 'Mathématiques',       cycle: '6ᵉ à 3ᵉ' },
@@ -112,7 +112,7 @@ const CMS_DEFAULTS = {
   'site:gallery': [
     { src: 'img/image-cours.jpeg',           caption: 'Le campus' },
     { src: 'img/image-salle_de_classe.jpeg', caption: 'Salle de classe' },
-    { src: 'img/flyers.jpeg',                caption: 'Rentrée 2025-2026' },
+    { src: 'img/flyers.jpeg',                caption: 'Rentrée 2026-2027' },
     { src: 'img/flyers2.jpeg',               caption: 'Normes internationales' },
   ],
   // Identifiants admin — le mot de passe n'est PAS stocké ici.
