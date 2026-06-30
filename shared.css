@@ -217,34 +217,37 @@ h1 em, h2 em, h3 em { font-style: normal; color: var(--gold-ink); }
 .hc-arrow .ic { width: 18px; height: 18px; }
 .hc-arrow.prev { left: 14px; }
 .hc-arrow.next { right: 14px; }
-.hero-badge { position: absolute; bottom: -22px; left: -22px; z-index: 3; background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: var(--navy); padding: 16px 22px; border-radius: 16px; box-shadow: var(--shadow-gold); }
-.hero-badge strong { display: block; font-family: var(--disp); font-size: 1.6rem; font-weight: 800; line-height: 1; }
-.hero-badge span { font-family: var(--lbl); font-size: .68rem; font-weight: 600; letter-spacing: .03em; text-transform: uppercase; opacity: .8; }
+.hero-badge { position: absolute; top: 18px; right: 18px; z-index: 4; background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: var(--navy); padding: 14px 20px; border-radius: 14px; box-shadow: var(--shadow-gold); }
+.hero-badge strong { display: block; font-family: var(--disp); font-size: 1.5rem; font-weight: 800; line-height: 1; }
+.hero-badge span { font-family: var(--lbl); font-size: .63rem; font-weight: 600; letter-spacing: .03em; text-transform: uppercase; opacity: .85; }
 @media(max-width:980px){
-  .hero-in { grid-template-columns:1fr; padding:48px 24px 56px; gap:40px; }
-  .hero-carousel { aspect-ratio: 16/10; }
-  /* Badge déplacé en haut à droite pour ne pas couvrir la légende */
-  .hero-badge { left: auto; right: 14px; bottom: auto; top: 14px; }
-  .hc-slide-cap { padding: 32px 20px 18px; }
-  .hc-slide-cap h3 { font-size: 1rem; }
-  /* Titre hero responsive */
+  .hero-in { grid-template-columns:1fr; padding:40px 20px 48px; gap:32px; }
+  .hero-carousel { aspect-ratio: 16/9; }
+  .hero-badge { top: 12px; right: 12px; padding: 10px 16px; }
+  .hero-badge strong { font-size: 1.3rem; }
+  .hero-badge span { font-size: .6rem; }
+  .hc-slide-cap { padding: 28px 18px 16px; }
+  .hc-slide-cap h3 { font-size: .97rem; }
   .hero-title { font-size: clamp(2rem, 6vw, 3rem); }
 }
 @media(max-width:600px){
-  .hero-title { font-size: clamp(1.75rem, 7vw, 2.4rem); }
-  .hero-sub { font-size: .97rem; }
+  .hero-in { padding: 32px 16px 40px; gap: 24px; }
+  .hero-title { font-size: clamp(1.7rem, 7.5vw, 2.4rem); }
+  .hero-sub { font-size: .94rem; }
   .hero-carousel { aspect-ratio: 4/3; }
-  .hero-badge { padding: 10px 14px; }
-  .hero-badge strong { font-size: 1.2rem; }
+  .hero-badge { top: 10px; right: 10px; padding: 8px 12px; border-radius: 10px; }
+  .hero-badge strong { font-size: 1.1rem; }
+  .hero-badge span { font-size: .56rem; }
   .hc-arrow { width: 32px; height: 32px; }
-  .hc-slide-cap h3 { font-size: .92rem; }
-  .hc-slide-cap { padding: 24px 16px 14px; }
+  .hc-slide-cap h3 { font-size: .88rem; }
+  .hc-slide-cap { padding: 22px 14px 12px; }
 }
 @media(max-width:380px){
-  .hero-title { font-size: 1.6rem; }
-  .hero-sub { font-size: .9rem; }
-  .hc-slide-cap .hc-tag { font-size: .6rem; }
-  .hc-slide-cap h3 { font-size: .85rem; }
+  .hero-title { font-size: 1.55rem; }
+  .hero-sub { font-size: .88rem; }
+  .hc-slide-cap .hc-tag { font-size: .58rem; }
+  .hc-slide-cap h3 { font-size: .82rem; }
+  .hero-badge { top: 8px; right: 8px; }
 }
 
 /* ── Stats band ── */
