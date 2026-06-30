@@ -1,4 +1,4 @@
-/**
+﻿/**
  * cms.js — CMS (Firebase Realtime Database)
  * Collège Privé Les Élites de Toumodi
  *
@@ -87,7 +87,7 @@ const CMS_DEFAULTS = {
     email: 'collegeelites.tdi@gmail.com',
     address: "Route de Oumé, face à la caserne des Sapeurs-Pompiers — Toumodi, Côte d'Ivoire",
     year: '2026-2027',
-    whatsapp: '2250708665904',
+    whatsapp: '2250711766284',
     // statistiques (page d'accueil)
     s1: 300, s2: 20, s3: 4, s4: 6,
     // frais
