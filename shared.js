@@ -123,18 +123,12 @@ document.addEventListener('DOMContentLoaded', function () {
     sections.forEach(function (s) { secObs.observe(s); });
   }
 
-  /* ── Contact form feedback (no backend yet) ── */
+  /* ── Contact form : soumission réelle via Formspree ── */
   var form = document.querySelector('form.contact-form');
   if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    form.addEventListener('submit', function () {
       var btn = form.querySelector('button[type="submit"]');
-      if (!btn) return;
-      var orig = btn.innerHTML;
-      btn.innerHTML = 'Message envoyé';
-      btn.style.background = '#1E7A3D';
-      btn.style.color = '#fff';
-      setTimeout(function () { btn.innerHTML = orig; btn.style.background = ''; btn.style.color = ''; form.reset(); }, 4200);
+      if (btn) { btn.disabled = true; btn.innerHTML = 'Envoi en cours…'; }
     });
   }
 
